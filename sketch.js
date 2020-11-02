@@ -34,6 +34,7 @@ let initialx = 250;
 let initialy = 650;
 let carSpeed = 0
 let carAngle = 270
+let test  = 0
 
 function preload() {
   carImg = loadImage('Sprites/Car.png');
