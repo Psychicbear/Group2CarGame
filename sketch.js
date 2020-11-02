@@ -28,31 +28,31 @@
 
   GrassCollision
 */
-let tracktxt; 
+let tracktxt;
 let grassGroup;
 let initialx = 250;
 let initialy = 650;
-let carSpeed = 0
-let carAngle = 270
+let carSpeed = 0;
+let carAngle = 270;
+let roadImg;
+let grassImg;
 
 function preload() {
-  carImg = loadImage('Sprites/Car.png');
-  grassImg = loadImage('Sprites/grass.png');
-  tracktxt = loadStrings('track.txt');
-  roadImg = loadImage('Sprites/road.png');
+  carImg = loadImage("Sprites/Car.png");
+  grassImg = loadImage("Sprites/grass.png");
+  tracktxt = loadStrings("track.txt");
+  roadImg = loadImage("Sprites/road.png");
 }
 
 function setup() {
-  angleMode(DEGREES)
+  angleMode(DEGREES);
   createMap();
 
-
-
   carSprite = createSprite(initialx, initialy, 50, 50);
-  carSprite.addImage(Car.png);
+  carSprite.addImage("Car.png");
 }
 
-function resetGame(){
+function resetGame() {
   carSprite.position.x = intiialx;
   carSprite.position.y = initialy;
   carSprite.setSpeed(0, 270);
@@ -61,61 +61,78 @@ function resetGame(){
 
 function draw() {
   drawSprites();
-  text(score,x,y);
-  
+  text(score, x, y);
 }
 
 // function createCar() {
-  
+
 // }
 
-function carMovement(){
+function carMovement() {
   //Riley: Checks keyCodes for activity and changes car movement variables based on key presses
-  if(keyIsDown(UP_ARROW)){
-    carSpeed += .5
+  if (keyIsDown(UP_ARROW)) {
+    carSpeed += 0.5;
     //Riley: Limits speed to 3
-    if(carSpeed > 3){carSpeed = 3}
+    if (carSpeed > 3) {
+      carSpeed = 3;
+    }
   }
-  if(keyIsDown(DOWN_ARROW)){
-    carSpeed -= .5
+  if (keyIsDown(DOWN_ARROW)) {
+    carSpeed -= 0.5;
     //Riley: Stops car from driving backwards after deceleration
-    if(carSpeed < 0){carSpeed = 0}
+    if (carSpeed < 0) {
+      carSpeed = 0;
+    }
   }
-  if(keyIsDown(LEFT_ARROW)){
-    carAngle -= .2
+  if (keyIsDown(LEFT_ARROW)) {
+    carAngle -= 0.2;
   }
-  if(keyIsDown(RIGHT_ARROW)){
-    carAngle += .2
+  if (keyIsDown(RIGHT_ARROW)) {
+    carAngle += 0.2;
   }
 
   //Riley: Applies carSpeed and carAngle to the sprite every time draw is called
-  carSprite.setSpeed(carSpeed, carAngle)
-  
+  carSprite.setSpeed(carSpeed, carAngle);
 }
- 
+
 function createMap() {
-const mapSize  = 500; 
-  const tileSize = mapSize / 10; 
-  
+  const mapSize = 500;
+  const tileSize = mapSize / 10;
+
   createCanvas(mapSize, mapSize);
   grassGroup = new Group();
   // Tama: "Below reads the numbers in track.txt and inteprets them into individual sprite tiles."
   for (let i = 0; i < tracktxt.length; i++) {
     let trackCOORDS = tracktxt[i];
     for (let j = 0; j < tracktxt.length; j++) {
-      if (trackCOORDS[j] == 0) { 
+      if (trackCOORDS[j] == 0) {
         (grass = createSprite(
-          (i*width) / trackCOORDS.length + tileSize/2, 
-          (j*height) / trackCOORDS.length + tileSize/2,
-          tileSize, tileSize
+          (i * width) / trackCOORDS.length + tileSize / 2,
+          (j * height) / trackCOORDS.length + tileSize / 2,
+          tileSize,
+          tileSize
         )),
-        grass.addImage(grassImg);
+          grass.addImage(grassImg);
         grass.scale = 0.5;
-        grassGroup.add(grass);         
+        grassGroup.add(grass);
       } else if (trackCOORDS[j] == 1) {
         road = createSprite(
-          (i*width)
-        )
+          (i * width) / trackCOORDS.length + tileSize / 2,
+          (j * height) / trackCOORDS.length + tileSize / 2,
+          tileSize,
+          tileSize
+        );
+        road.addImage(roadImg);
+        road.scale = 0.5;
+      } else if (trackCOORDS[j] == 2) {
+        finish = createSprite(
+          (i * width) / trackCOORDS.length + tileSize / 2,
+          (j * height) / trackCOORDS.length + tileSize / 2,
+          tileSize,
+          tileSize
+        );
+        finish.addImage(roadImg);
+        finish.scale = 0.5;
       }
     }
   }
