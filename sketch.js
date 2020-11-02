@@ -115,7 +115,7 @@ const mapSize  = 500;
         grassGroup.add(grass);         
       } else if (trackCOORDS[j] == 1) {
         road = createSprite(
-          (i*wi)
+          (i*width)
         )
       }
     }
