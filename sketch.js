@@ -38,6 +38,7 @@ let carAngle = 270;
 function preload() {
   carImg = loadImage("Sprites/Car.png");
   grassImg = loadImage("Sprites/grass.png");
+  slImage = loadImage("Sprites/startline.png")
   tracktxt = loadStrings("track.txt");
   roadImg = loadImage("Sprites/road.png");
 }
