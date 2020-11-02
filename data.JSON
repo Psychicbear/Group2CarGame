@@ -1,0 +1,131 @@
+[
+    {
+        "gameState": "LOADING",
+        "sprites": {
+            "playButton": {
+                "type": "uiElement",
+                "uiIndex": 0,
+                "destination": 1,
+                "isCreated": false
+            },
+            "continueButton": {
+                "type": "uiElement",
+                "uiIndex": 2,
+                "destination": 1,
+                "isCreated": false
+            }
+        }
+    },
+    {
+        "gameState": "MAIN_MENU",
+        "sprites": {
+            "startButton": {
+                "type": "uiElement",
+                "uiIndex": 1,
+                "destination": 2,
+                "isCreated": false
+            },
+            "controlsButton": {
+                "type": "uiElement",
+                "uiIndex": 2,
+                "destination": 4,
+                "isCreated": false
+            }
+        }
+    },
+    {
+        "gameState": "PLAY",
+        "sprites": {
+            "playerShip": {
+                "type": "playerSprites",
+                "init": false,
+                "speed": 4,
+                "inputArray": [],
+                "deathSoundPlayed": false,
+                "fireMode": 1,
+                "fireRate": 400,
+                "canShoot": false,
+                "shootTimer": 0,
+                "isDead": false,
+                "deathTimer": 0
+            },
+            "enemy1": {
+                "type": "enemies",
+                "enemyIndex": 0,
+                "speed": 4,
+                "score": 100,
+                "isCreated": false,
+                "isAlive": true,
+                "hp": 2,
+                "minChance": 0.3,
+                "maxChance": 0.5
+            },
+            "enemy2": {
+                "type": "enemies",
+                "enemyIndex": 1,
+                "speed": 7,
+                "score": 200,
+                "isCreated": false,
+                "isAlive": true,
+                "hp": 1,
+                "minChance": 0.8,
+                "maxChance": 1
+            },
+            "enemy3": {
+                "type": "enemies",
+                "enemyIndex": 2,
+                "speed": 2,
+                "score": 300,
+                "isCreated": false,
+                "isAlive": true,
+                "hp": 3,
+                "minChance": 1,
+                "maxChance": 2
+            },
+            "fireRateUp": {
+                "type": "powerups",
+                "powerUpNumber": 0,
+                "speed": 2,
+                "currentChance": 0,
+                "spawnsAt": 10,
+                "isActive": false,
+                "timer": 0,
+                "duration": 10000,
+                "fireRate": 200
+            },
+            "fireModeUp": {
+                "type": "powerups",
+                "defaultImg": 0,
+                "powerUpNumber": 1,
+                "currentChance": 0,
+                "spawnsAt": 10,
+                "isActive": false,
+                "timer": 0,
+                "duration": 10000
+            }
+            
+        }
+    },
+    {
+        "gameState": "LEADERBOARD",
+        "sprites": {
+            "resetButton": {
+                "type": "uiElement",
+                "uiIndex": 3,
+                "destination": 1,
+                "isCreated": false
+            }
+        }
+    },
+    {
+        "gameState": "CONTROLS",
+        "sprites": {
+            "backButton": {
+                "type": "uiElement",
+                "uiIndex": 3,
+                "destination": 1,
+                "isCreated": false
+            }
+        }
+    }
+]
