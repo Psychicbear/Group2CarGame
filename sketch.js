@@ -20,15 +20,18 @@ let creditsPos = H;
 function preload() {
   mainScreenSong = loadSound("otherassets/mainscreensong.mp3");
   playScreenSong = loadSound("otherassets/playscreensong.mp3");
-  meowSound = loadSound("otherassets/meowsound.wav");
+  crunch = loadSound("otherassets/crunch.wav");
   shopclick = loadSound("otherassets/shopclick.wav");
   menuselect = loadSound("otherassets/menuselect.wav");
   clicksound = loadSound("otherassets/clicksound.wav");
+  hiss = loadSound("otherassets/hiss.wav");
   instructiondoc = loadStrings("instructions.txt");
   creditsdoc = loadStrings("credits.txt");
   newFont = loadFont("Minecraft.ttf");
   pauseImg = loadImage("otherassets/pause.png");
   yarnballImg = loadImage("Sprites/yarnball.png.png");
+  waterTowerIcon = loadImage("Sprites/watertowericon.png");
+  biscuitFactoryIcon = loadImage("otherassets/biccyFactory.png");
   towerImg = [
     loadImage("Sprites/tower1.png"),
     loadImage("Sprites/watertower.png"),
@@ -108,9 +111,9 @@ function draw() {
       drawCreditsScreen();
       break;
   }
-  fill(0);
-  textSize(20);
-  text("FPS: " + round(frameRate()), 50, 50);
+  // fill(0);
+  // textSize(20);
+  // text("FPS: " + round(frameRate()), 50, 50);
 }
 
 function drawLoadingScreen(screenNumber) {
@@ -323,13 +326,42 @@ function drawInstructionsScreen() {
   fill(255);
   textSize(32);
   textFont(newFont);
-  text(instructiondoc[instructPage], width / 4, height / 2.5, width / 2, height / 1.5);
+  text(
+    instructiondoc[instructPage],
+    width / 4.1,
+    height / 2.5,
+    width / 2.1,
+    height / 1.5
+  );
 
   textSize(14);
   fill("red");
   text("<Press [Esc] for Main Menu>", 10, 10, 100, 100);
   fill("green");
   text("<Press [Enter] to Play!>", 10, 80, 100, 100);
+
+  // displays images depending on what page you're on
+  if (instructPage === 7) {
+    image(biscuitFactoryIcon, width - 300, height / 2.5, 200, 200);
+  } else if (instructPage === 8) {
+    image(biscuitFactoryIcon, width - 300, height / 2.5, 200, 200);
+  } else if (instructPage === 9) {
+    image(waterTowerIcon, width - 300, height / 2.5, 200, 200);
+  } else if (instructPage === 10) {
+    image(towerImg[2], width - 300, height / 2.5, 200, 200);
+  }
+  // reverts page back to beginning if finishes and stops player from going backwards
+  if (instructPage === 13) {
+    instructPage = 0;
+  } else if (instructPage === -1) {
+    instructPage = 0;
+  }
+  // displays page number
+  fill("white");
+  text("Page Number: " + (instructPage + 1) + "/13", width - 150, height - 45, 150, 50);
+
+  fill("white");
+  text("Use Left and Right arrow keys to change pages!", 25, height - 45, 300, 50);
 }
 
 function drawCreditsScreen() {
@@ -339,6 +371,15 @@ function drawCreditsScreen() {
   textFont(newFont);
   text(creditsdoc, 150, creditsPos, width - 250, height * 10);
   creditsPos -= 1.5;
+  if (creditsPos <= -3500) {
+    currentScene = 1;
+  }
+  textFont(newFont);
+  textSize(14);
+  fill("red");
+  text("<Press [Esc] for Main Menu>", 10, 10, 100, 100);
+  fill("green");
+  text("<Press [Enter] to Play!>", 10, 80, 100, 100);
 }
 
 //Converts loaded strings to readable arrays
@@ -427,13 +468,16 @@ function targetSelect(spriteA, enemy) {
 function enemyDamage(bullet, enemy) {
   enemy.enemyHealth -= bullet.damage;
   if (enemy.enemyHealth <= 0) {
-    meowSound.play();
+    // crunch.volume(0.2);
+    // crunch.play();
     enemy.life = 1;
     game.playerMoney += enemy.enemyValue;
     liveIndex = liveEnemies.indexOf(enemy);
     liveEnemies.splice(liveIndex, 1);
   }
   if (bullet.id == 1) {
+    // hiss.volume(0.2);
+    // hiss.play();
     enemy.pathIndex -= 10;
   }
   bullet.remove();
